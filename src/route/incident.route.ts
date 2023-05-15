@@ -1,9 +1,10 @@
 import express from "express";
-import { createNewIncident, getAllIncident } from "../controllers/incident.controller";
+import { createNewIncident, getByLocation, getByUser } from "../controllers/incident.controller";
 
 const router = express.Router();
 
 router.post("/", createNewIncident)
-router.get("/", getAllIncident)
+router.get("/user", getByUser)
+router.get("/location", getByLocation)
 
 export default router;
