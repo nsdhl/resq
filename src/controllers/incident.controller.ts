@@ -35,4 +35,23 @@ const getByUser = async (req: Request, res: Response) => {
     res.status(200).json(allIncidents);
   };
 
-export { createNewIncident, getByLocation, getByUser };
+const getByIncidentName = async (req: Request, res:Response) => {
+  const {incidentName} = req.query;
+
+  const allIncidents = await Incident.find({incidentName:incidentName});
+
+  res.status(200).json(allIncidents);
+};
+
+const getByIncidentImage = async(req: Request, res:Response) =>{
+  const {incidentImage} = req.query;
+
+  const allIncidents = await Incident.find({incidentImage:incidentImage})
+
+  res.status(200).json(allIncidents)
+}
+
+
+ 
+
+export { createNewIncident, getByLocation, getByUser, getByIncidentName, getByIncidentImage };
