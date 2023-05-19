@@ -3,27 +3,24 @@ import mongoose, { Schema, Types, model } from "mongoose";
 interface IUser {
     _id:Types.ObjectId;
     fullname:string, 
-    isAdmin:boolean,
-    description:string, 
-    email:string, 
+    roles:[],
+    username:string, 
     password:string, 
 }
+
+
 
 const userSchema = new Schema<IUser>({
     fullname:{
         type:String, 
         required:true
     },
-    isAdmin:{
-        type:Boolean, 
+    roles:{
+        type:[], 
         required:true, 
     },
 
-    description:{
-        type:String, 
-        required:true
-    },
-    email:{
+    username:{
         type:String, 
         required:true
     },
