@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 interface IUser {
   _id: Types.ObjectId;
   fullname: string;
-  roles: [];
+  roles: string[];
   username: string;
   password: string;
   comparePassword: (password: string) => boolean;
@@ -18,7 +18,7 @@ const userSchema = new Schema<IUser>({
     required: true,
   },
   roles: {
-    type: [],
+    type: [String],
     required: true,
   },
 
