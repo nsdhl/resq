@@ -1,25 +1,24 @@
 import User from "../models/user.model";
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-export const createUser = async (req: Request, res: Response) => {
-  const { username, fullname, roles, password, description } = req.body;
 
- 
+export const createUser = async (req: Request, res: Response) => {
+  const { username, fullname, roles, password } = req.body;
+
+
   const usernameExists = await User.findOne({ username });
   if (usernameExists) {
     return res.json({
       error: "email already exists try again with different email",
     });
   }
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+
   const user = new User({
     username,
     fullname,
     roles,
-    password:hashedPassword,
+    password
   });
-  
+
   try {
     await user.save();
     res.status(201).send("user was created !!");
@@ -28,15 +27,72 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * User login controller
+  */
+
 export const userLogin = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
-    const userExists = await User.findOne({ username, password });
-    if (userExists) {
-      res.status(200).json({ success: "login successful" });
+    const user = await User.findOne({ username });
+
+    /* Check if user exists
+      */
+    if (!user) {
+      return res.status(400).json({ failure: "User doesn't exist!" });
     }
+    /**
+     * Check if user password matches
+     */
+    const isMatched = await user.comparePassword(password);
+
+    if (!isMatched) {
+      return res.status(401).json({
+        status: "failure",
+        message: "Username or password didn't match!"
+      })
+    }
+
+    /**
+     * Create JWT access token
+     */
+
+    const token = user.createAccessToken();
+
+    res.status(200).json({
+      token,
+      username,
+      roles: user.roles
+    })
+
   } catch (e) {
     res.status(403).json("sorry could not login ");
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
