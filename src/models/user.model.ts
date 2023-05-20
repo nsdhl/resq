@@ -32,17 +32,17 @@ const userSchema = new Schema<IUser>({
   },
 });
 
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function() {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-userSchema.methods.comparePassword = async function (password: string) {
+userSchema.methods.comparePassword = async function(password: string) {
   const isMatch = await bcrypt.compare(password, this.password);
   return isMatch;
 };
 
-userSchema.methods.createAccessToken = function (): string {
+userSchema.methods.createAccessToken = function(): string {
   return jwt.sign(
     { userId: this._id, username: this.username },
     process.env.JWT_SECRET as string,

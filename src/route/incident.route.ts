@@ -1,11 +1,13 @@
 import express from "express";
-import { createNewIncident, getByIncidentImage, getByIncidentName, getByLocation, getByUser } from "../controllers/incident.controller";
+import { createNewIncident, getByLocation, getByUser } from "../controllers/incident.controller";
+import { isLogin } from "../middleware/auth.middleware";
 
 const router = express.Router();
 
-router.post("/", createNewIncident)
-router.get("/user", getByUser)
+//@ts-ignore
+router.post("/", isLogin, createNewIncident)
+//@ts-ignore
+router.get("/user", isLogin, getByUser)
 router.get("/location", getByLocation)
-router.get("/incidentName", getByIncidentName)
-router.get("/incidentImage", getByIncidentImage )
+
 export default router;
