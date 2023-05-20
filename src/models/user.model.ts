@@ -12,12 +12,10 @@ interface IUser {
   createAccessToken: () => string;
 }
 
-
-
 const userSchema = new Schema<IUser>({
   fullname: {
     type: String,
-    required: true
+    required: true,
   },
   roles: {
     type: [],
@@ -26,34 +24,33 @@ const userSchema = new Schema<IUser>({
 
   username: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+});
 
-})
-
-userSchema.pre("save", async function() {
+userSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-})
+});
 
-userSchema.methods.comparePassword = async function(password: string) {
+userSchema.methods.comparePassword = async function (password: string) {
   const isMatch = await bcrypt.compare(password, this.password);
   return isMatch;
-}
+};
 
-userSchema.methods.createAccessToken = function(): string {
+userSchema.methods.createAccessToken = function (): string {
   return jwt.sign(
     { userId: this._id, username: this.username },
-    "jsdfhoejsiodfjicdnowkajodfjieJISODFJKjodfjksoquoerj",
+    process.env.JWT_SECRET as string,
     {
-      expiresIn: "1d"
+      expiresIn: process.env.EXPIRES_IN,
     }
-  )
-}
+  );
+};
 
 const User = model<IUser>("User", userSchema);
-export default User
+export default User;
