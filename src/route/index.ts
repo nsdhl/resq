@@ -1,11 +1,11 @@
 import express from "express";
 <<<<<<< HEAD
 import incidentRoutes from "./incident.route";
-
+import userRoute from "./user.route";
 const router = express.Router();
 
 router.use("/incident", incidentRoutes)
-router.use("/user/regiser", )
+router.use("/user", userRoute)
 
 =======
 

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const dbConnection = () => {
     try{
-        mongoose.connect("mongodb://localhost:27017/");
+        mongoose.connect(process.env.MONGO_URL as string);
         console.log("Database connected");
         
     }
