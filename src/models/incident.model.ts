@@ -2,7 +2,7 @@ import mongoose, { Schema, Types, model } from "mongoose";
 
 interface IIncident {
   _id: Types.ObjectId;
-  user: string;
+  user: Types.ObjectId;
   location: string;
   description: string;
   incidentName: string;
@@ -10,7 +10,8 @@ interface IIncident {
 
 const incidentSchema = new Schema<IIncident>({
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   location: {
