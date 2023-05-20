@@ -1,16 +1,14 @@
 import { Request, Response } from "express";
 import { Incident } from "../models/incident.model";
+import { IGetAuthRequest } from "../typings/interface";
 
-const createNewIncident = async (req: Request, res: Response) => {
-  const { user, location, description, incidentName } = req.body;
+const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
+  const { location, description, incidentName } = req.body;
 
-  if (!user)
-    res.status(400).json({
-      error: "user is required!",
-    });
+  const { userId } = req.user;
 
   const newIncident = await Incident.create({
-    user,
+    user: userId,
     location,
     description,
     incidentName,
@@ -27,12 +25,12 @@ const getByLocation = async (req: Request, res: Response) => {
   res.status(200).json(allIncidents);
 };
 
-const getByUser = async (req: Request, res: Response) => {
-    const { user } = req.query;
-  
-    const allIncidents = await Incident.find({ user: user });
-  
-    res.status(200).json(allIncidents);
-  };
+const getByUser = async (req: IGetAuthRequest, res: Response) => {
+  const { userId } = req.user;
+
+  const allIncidents = await Incident.find({ user: userId });
+
+  res.status(200).json(allIncidents);
+};
 
 export { createNewIncident, getByLocation, getByUser };
