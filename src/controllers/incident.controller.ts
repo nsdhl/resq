@@ -9,7 +9,10 @@ const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
 
   const newIncident = await Incident.create({
     user: userId,
-    location,
+    location: {
+      type: "Point",
+      coordinates: location
+    },
     description,
     incidentName,
   });
@@ -18,11 +21,24 @@ const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
 };
 
 const getByLocation = async (req: Request, res: Response) => {
-  const { location } = req.query;
 
-  const allIncidents = await Incident.find({ location: location });
+  const { location } = req.body;
 
-  res.status(200).json(allIncidents);
+  const i = await Incident.find(
+    {
+      location:
+      {
+        $near:
+        {
+          $geometry: { type: "Point", coordinates: location },
+          $minDistance: 10,
+          $maxDistance: 1000
+        }
+      }
+    }
+  )
+
+  res.status(200).json(i);
 };
 
 const getByUser = async (req: IGetAuthRequest, res: Response) => {
