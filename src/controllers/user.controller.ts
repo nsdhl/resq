@@ -34,6 +34,7 @@ export const createUser = async (req: Request, res: Response) => {
  * User login controller
   */
 
+
 export const userLogin = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
@@ -43,6 +44,7 @@ export const userLogin = async (req: Request, res: Response) => {
       */
     if (!user) {
       return res.status(400).json({ failure: "User doesn't exist!" });
+      
     }
     /**
      * Check if user password matches

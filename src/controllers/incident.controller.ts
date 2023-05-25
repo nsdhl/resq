@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { Incident } from "../models/incident.model";
 import { IGetAuthRequest } from "../typings/interface";
 
+
+
+
+
 const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
   const { location, description, incidentName } = req.body;
 
