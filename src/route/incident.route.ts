@@ -8,6 +8,6 @@ const router = express.Router();
 router.post("/", isLogin, createNewIncident)
 //@ts-ignore
 router.get("/user", isLogin, getByUser)
-router.get("/location", getByLocation)
+router.get("/", getByLocation)
 
 export default router;

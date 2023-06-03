@@ -3,7 +3,10 @@ import mongoose, { Schema, Types, model } from "mongoose";
 interface IIncident {
   _id: Types.ObjectId;
   user: Types.ObjectId;
-  location: string;
+  location: {
+    type: String,
+    coordinates: number[]
+  };
   description: string;
   incidentName: string;
 }
@@ -15,8 +18,11 @@ const incidentSchema = new Schema<IIncident>({
     required: true,
   },
   location: {
-    type: String,
-    required: true,
+    type: {
+      type: String,
+      default: "Point",
+    },
+    coordinates: [Number]
   },
   description: {
     type: String,
