@@ -1,16 +1,21 @@
 import { Request } from "express";
 
-type User = {
-  username: string;
-  userId: string;
-}
-
 export interface IJwtPayload {
   userId: string;
   username: string;
+  location: {
+    type: string;
+    coordinate: number[];
+  },
+  iat: number;
+  exp: number;
 }
 
-export interface IGetAuthRequest extends Request {
-  user: IJwtPayload
+export interface AuthRequest<T = {}> extends Express.Request {
+  headers: {
+    authorization?: string;
+  }
+  user?: IJwtPayload;
+  body: T;
 }
 

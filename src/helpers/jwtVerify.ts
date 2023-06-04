@@ -1,19 +1,15 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { IJwtPayload } from "../typings/interface";
 
 
 
 export const jwtVerify = (token: string) => {
   try {
-    const decoded: string | JwtPayload = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded: IJwtPayload = jwt.verify(token, process.env.JWT_SECRET as string) as IJwtPayload;
 
-    return {
-      status: "success",
-      message: decoded
-    }
+    return decoded;
   } catch (e) {
-    return {
-      status: "failure",
-      message: e
-    }
+    throw new Error("Jwt is not valid!")
+
   }
 }
