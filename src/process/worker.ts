@@ -1,11 +1,15 @@
 import { Job, Worker } from "bullmq";
+import { getNearestUsers } from "../functions/getNearestUsers";
 
 
 class NotificationWorker {
   constructor() {
     const worker: Worker = new Worker('notification', async (job: Job) => {
-      await job.updateProgress(job.data)
-      return job.data;
+      // await job.updateProgress(job.data)
+      const users = await getNearestUsers(job.data);
+
+
+
     }, {
       connection: {
         host: "localhost",

@@ -23,27 +23,6 @@ const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
   notificationQueue.add('location', location)
 };
 
-const getByLocation = async (req: Request, res: Response) => {
-
-  const { location } = req.body;
-
-  const i = await Incident.find(
-    {
-      location:
-      {
-        $near:
-        {
-          $geometry: { type: "Point", coordinates: location },
-          $minDistance: 10,
-          $maxDistance: 1000
-        }
-      }
-    }
-  )
-
-  res.status(200).json(i);
-};
-
 const getByUser = async (req: IGetAuthRequest, res: Response) => {
   const { userId } = req.user;
 
@@ -52,4 +31,4 @@ const getByUser = async (req: IGetAuthRequest, res: Response) => {
   res.status(200).json(allIncidents);
 };
 
-export { createNewIncident, getByLocation, getByUser };
+export { createNewIncident, getByUser };

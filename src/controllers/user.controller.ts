@@ -48,10 +48,10 @@ export const userLogin = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(400).json({ failure: "User doesn't exist!" });
     }
+
     /**
      * Check if user password matches
      */
-
     const isMatched = await user.comparePassword(password);
 
     if (!isMatched) {
