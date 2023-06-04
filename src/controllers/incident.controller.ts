@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Incident } from "../models/incident.model";
 import { IGetAuthRequest } from "../typings/interface";
+import { notificationQueue } from "../process/notificationQueue";
 
 const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
   const { location, description, incidentName } = req.body;
@@ -18,6 +19,8 @@ const createNewIncident = async (req: IGetAuthRequest, res: Response) => {
   });
 
   res.status(200).json(newIncident);
+
+  notificationQueue.add('location', location)
 };
 
 const getByLocation = async (req: Request, res: Response) => {

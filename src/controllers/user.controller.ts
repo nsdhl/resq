@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { username, fullname, roles, password } = req.body;
+    const { username, fullname, location, roles, password } = req.body;
     const usernameExists = await User.findOne({ username });
     if (usernameExists) {
       return res.json({
@@ -15,6 +15,10 @@ export const createUser = async (req: Request, res: Response) => {
       username,
       fullname,
       roles,
+      location: {
+        type: "Point",
+        coordinates: location
+      },
       password
     });
 

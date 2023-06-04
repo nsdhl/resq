@@ -6,6 +6,10 @@ interface IUser {
   _id: Types.ObjectId;
   fullname: string;
   roles: string[];
+  location: {
+    type: String,
+    coordinates: number[]
+  };
   username: string;
   password: string;
   comparePassword: (password: string) => boolean;
@@ -20,6 +24,13 @@ const userSchema = new Schema<IUser>({
   roles: {
     type: [String],
     required: true,
+  },
+  location: {
+    type: {
+      type: String,
+      default: "Point",
+    },
+    coordinates: [Number]
   },
 
   username: {
@@ -44,7 +55,7 @@ userSchema.methods.comparePassword = async function(password: string) {
 
 userSchema.methods.createAccessToken = function(): string {
   return jwt.sign(
-    { userId: this._id, username: this.username },
+    { userId: this._id, username: this.username, location: this.location, role: this.roles },
     process.env.JWT_SECRET as string,
     {
       expiresIn: process.env.EXPIRES_IN,
