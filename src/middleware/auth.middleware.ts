@@ -1,4 +1,4 @@
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { jwtVerify } from "../helpers/jwtVerify";
 import { AuthRequest, IJwtPayload } from "../typings/interface";
 

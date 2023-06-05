@@ -4,9 +4,8 @@ import { AuthRequest } from "../typings/interface";
 
 export const createSubscription = async (req: AuthRequest, res: Response) => {
   try {
-    if (!req.user) {
-      throw new Error("Unauthorized!")
-    }
+
+    if (!req.user) return;
 
     const { userId } = req.user;
 

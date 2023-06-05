@@ -12,9 +12,7 @@ interface ICreateIncidentBody {
 const createNewIncident = async (req: AuthRequest<ICreateIncidentBody>, res: Response) => {
   const { location, description, incidentName } = req.body;
 
-  if (!req.user) {
-    return res.status(401).json("Unauthorized!")
-  }
+  if (!req.user) return;
 
   const { userId } = req.user;
 
@@ -34,10 +32,7 @@ const createNewIncident = async (req: AuthRequest<ICreateIncidentBody>, res: Res
 };
 
 const getByUser = async (req: AuthRequest, res: Response) => {
-
-  if (!req.user) {
-    return res.status(401).json("Unauthorized!")
-  }
+  if (!req.user) return;
 
   const { userId } = req.user;
 
