@@ -1,0 +1,14 @@
+{
+  "name": "resq-api",
+  "version": "1.0.0",
+  "main": "./src/app.ts",
+  "scripts": {
+    "dev": "npx nodemon",
+    "build": "yarn install && rimraf ./build && tsc",
+    "start": "yarn run build && node build/app.js",
+    "gen_vapid_keys": " web-push generate-vapid-keys [--json]"
+  },
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
