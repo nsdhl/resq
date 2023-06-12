@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AuthRequest, IJwtPayload } from "../typings/interface";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 // For verifying token
 export const isLogin = async (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -11,14 +11,16 @@ export const isLogin = async (req: AuthRequest, res: Response, next: NextFunctio
         ERR: "You are not authorized to access this route!"
       })
     }
-    const payload = jwt.verify(token, process.env.JWT_SECRET as string)
+    console.log(process.env.JWT_SECRET);
+    const payload = jwt.verify(token as string, process.env.JWT_SECRET as string)
+    console.log(payload);
+    req.user = payload as IJwtPayload
 
-    req.user = payload as unknown as IJwtPayload
-
-    next();
+    return next();
   } catch (err) {
     res.status(401).json({
-      ERR: "You are not authorized to access this route!"
+      ERR: "Something terrible happened during token verification!",
+      message: err
     })
   }
 }

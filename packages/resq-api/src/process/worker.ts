@@ -16,13 +16,14 @@ class NotificationWorker {
   constructor() {
     const worker: Worker = new Worker('notification', async (job: Job) => {
       // await job.updateProgress(job.data)
-      const users = await getNearestUsers(job.data);
+      const users = await getNearestUsers(job.data.location);
 
-      const subscribedUsers = await Subscription.find({ user: users.map(el => el._id) }).select("-user")
+      const subscribedUsers = await Subscription.find({ user: users.map(el => el._id) }).select(["-user", "-_id", "-__v"])
+      console.log("hello", subscribedUsers);
 
       const options: any = {
         vapidDetails: {
-          subject: 'Incident Notification',
+          subject: 'mailto:resq@resq.com',
           publicKey: process.env.VAPID_PUBLIC_KEY,
           privateKey: process.env.VAPID_PRIVATE_KEY,
         },
@@ -33,9 +34,9 @@ class NotificationWorker {
           await webPush.sendNotification(
             el,
             JSON.stringify({
-              title: 'Hello from server',
-              description: 'this message is coming from the server',
-              image: 'https://cdn2.vectorstock.com/i/thumb-large/94/66/emoji-smile-icon-symbol-smiley-face-vector-26119466.jpg',
+              title: job.data.incidentName,
+              description: job.data.description,
+              location: job.data.location
             }),
             options
           )
@@ -52,13 +53,9 @@ class NotificationWorker {
     })
 
     worker.on('progress', (job: Job, progress: any) => {
-      console.log("progress1", job.data);
-      console.log("progress2", job.progress)
     })
 
     worker.on('completed', (job: Job, returnValue: any) => {
-      console.log("completed1", job.data);
-      console.log("completed2", returnValue)
     })
 
     worker.on('error', err => {

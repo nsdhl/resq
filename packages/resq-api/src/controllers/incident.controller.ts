@@ -28,7 +28,7 @@ const createNewIncident = async (req: AuthRequest<ICreateIncidentBody>, res: Res
 
     res.status(200).json(newIncident);
 
-    notificationQueue.add('location', location)
+    notificationQueue.add('location', { location, description, incidentName })
   } catch (e) {
     res.status(400).json("Something terrible happened!")
   }

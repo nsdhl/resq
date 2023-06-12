@@ -58,7 +58,7 @@ userSchema.methods.createAccessToken = function(): string {
     { userId: this._id, username: this.username, location: this.location, role: this.roles },
     process.env.JWT_SECRET as string,
     {
-      expiresIn: process.env.EXPIRES_IN,
+      expiresIn: "1d",
     }
   );
 };
