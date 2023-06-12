@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev:all": "nx run-many -t dev",
+    "dev:all-redis": "nx run-many -t dev & redis-server",
     "dev:api": "nx dev resq-api",
     "build:api": "nx build resq-api",
     "start:api": "nx start resq-api",

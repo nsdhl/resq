@@ -3,23 +3,12 @@ import { getNearestUsers } from "../functions/getNearestUsers";
 import webPush from "web-push";
 import { Subscription } from "../models/subscription.model";
 
-// type IVapidDetails = {
-//   vapidDetails: {
-//     subject: string;
-//     publicKey: string;
-//     privateKey: string;
-//   }
-// }
-
-
 class NotificationWorker {
   constructor() {
     const worker: Worker = new Worker('notification', async (job: Job) => {
-      // await job.updateProgress(job.data)
       const users = await getNearestUsers(job.data.location);
 
       const subscribedUsers = await Subscription.find({ user: users.map(el => el._id) }).select(["-user", "-_id", "-__v"])
-      console.log("hello", subscribedUsers);
 
       const options: any = {
         vapidDetails: {
@@ -44,7 +33,10 @@ class NotificationWorker {
           console.log(error);
         }
       })
-      return users;
+      return {
+        status: "Notification sent!",
+        location: job.data.location
+      };
     }, {
       connection: {
         host: "localhost",
@@ -52,10 +44,8 @@ class NotificationWorker {
       }
     })
 
-    worker.on('progress', (job: Job, progress: any) => {
-    })
-
     worker.on('completed', (job: Job, returnValue: any) => {
+      console.log(returnValue);
     })
 
     worker.on('error', err => {

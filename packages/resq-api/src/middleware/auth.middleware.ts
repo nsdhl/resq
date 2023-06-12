@@ -11,9 +11,7 @@ export const isLogin = async (req: AuthRequest, res: Response, next: NextFunctio
         ERR: "You are not authorized to access this route!"
       })
     }
-    console.log(process.env.JWT_SECRET);
     const payload = jwt.verify(token as string, process.env.JWT_SECRET as string)
-    console.log(payload);
     req.user = payload as IJwtPayload
 
     return next();
