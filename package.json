@@ -2,7 +2,17 @@
   "name": "resq",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev:all": "nx run-many -t dev",
+    "dev:api": "nx dev resq-api",
+    "build:api": "nx build resq-api",
+    "start:api": "nx start resq-api",
+    "gen:vapid": "nx gen_vapid_keys resq-api",
+    "dev:ui": "nx dev resq-ui",
+    "build:ui": "nx build resq-ui",
+    "lint:ui": "nx lint resq-ui",
+    "preview:ui": "nx preview resq-ui"
+  },
   "private": true,
   "dependencies": {
     "bcrypt": "^5.1.0",
