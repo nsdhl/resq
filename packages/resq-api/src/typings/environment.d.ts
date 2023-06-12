@@ -5,7 +5,7 @@ declare global {
     interface ProcessEnv {
       JWT_SECRET: string;
       EXPIRES_IN: string;
-      PORT: number;
+      PORT: string;
       MONGO_URL: string;
       VAPID_PUBLIC_KEY: string;
       VAPID_PRIVATE_KEY: string;
