@@ -1,5 +1,7 @@
 import { registerServiceWorker, subscribe } from "./helpers/registerSw";
-import "./axios/axios";
+import Router from "./router.tsx"
+import Navbar from "./components/Navbar.tsx";
+import "./axios.ts"
 
 function App() {
 
@@ -12,11 +14,12 @@ function App() {
     }
   }
 
-
   return (
     <>
-      <h1>HELLO, RESQ!</h1>
+      {/* <h1>HELLO, RESQ!</h1> */}
       <button onClick={notification}>Turn On Notification?</button>
+      <Navbar />
+      <Router />
     </>
   )
 }

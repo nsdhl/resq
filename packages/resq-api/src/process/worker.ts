@@ -45,7 +45,7 @@ class NotificationWorker {
     })
 
     worker.on('completed', (job: Job, returnValue: any) => {
-      console.log(returnValue);
+      console.log("Notification Sent for: ", returnValue);
     })
 
     worker.on('error', err => {

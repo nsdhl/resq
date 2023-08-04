@@ -1,4 +1,5 @@
-import { resqApi } from "../axios/axios";
+import { url } from "../axios";
+
 
 async function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
@@ -23,7 +24,7 @@ async function subscribe(serviceWorkerReg: any) {
         applicationServerKey: 'BD1--5QyCFhvTd0ZrJZ-85zd17GniSNrzSo6rbgy0BTpEg_Dnel-2aqX4OF_aDlqAh4BuaB0DbG42g0xGyh77AU',
       });
     }
-    await resqApi.post('/subscription', subscription);
+    await url.post('/subscription', subscription);
   } catch (e) {
     console.log(e);
   }
