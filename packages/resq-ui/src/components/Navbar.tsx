@@ -1,11 +1,21 @@
 import { AppBar, Box, Button, IconButton, Stack, Toolbar } from '@mui/material'
 import { ErrorOutline, Menu } from "@mui/icons-material"
 import { useNavigate } from 'react-router-dom'
+import { registerServiceWorker, subscribe } from '../helpers/registerSw';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user") as string)
+
+  const notification = async () => {
+    try {
+      const serviceWorkerReg = await registerServiceWorker();
+      await subscribe(serviceWorkerReg);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -20,6 +30,10 @@ const Navbar = () => {
           >
             < Menu />
           </IconButton>
+          <Button onClick={notification} variant="contained" color="info" size="small" sx={{
+            fontSize: "12px",
+            color: "white"
+          }}>Turn On Notification</Button>
           <Stack direction="row" justifyContent="right" sx={{
             width: "100%"
           }}>

@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       {/* <h1>HELLO, RESQ!</h1> */}
-      <button onClick={notification}>Turn On Notification?</button>
+      {/* <button onClick={notification}>Turn On Notification?</button> */}
       <Navbar />
       <Router />
     </>
