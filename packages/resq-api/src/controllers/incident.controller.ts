@@ -44,4 +44,10 @@ const getByUser = async (req: AuthRequest, res: Response) => {
   res.status(200).json(allIncidents);
 };
 
-export { createNewIncident, getByUser };
+const getAllIncident = async (req: Request, res: Response) => {
+  const incidents = await Incident.find();
+
+  res.status(200).json(incidents)
+}
+
+export { createNewIncident, getByUser, getAllIncident };
