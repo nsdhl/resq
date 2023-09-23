@@ -15,8 +15,6 @@ const ReportPage = () => {
     )()
   }, [])
 
-  console.log("inc", incident)
-
   return (
     <>
       <TableContainer component={Paper}>

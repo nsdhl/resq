@@ -1,17 +1,24 @@
 import User from "../models/user.model"
 
 export const getNearestUsers = async (location: number[]) => {
-  return await User.find(
-    {
-      location:
+  try {
+    let user = await User.find(
       {
-        $near:
+        location:
         {
-          $geometry: { type: "Point", coordinates: location },
-          $minDistance: 10,
-          $maxDistance: 1000
+          $near:
+          {
+            $geometry: { type: "Point", coordinates: location },
+            $minDistance: 10,
+            $maxDistance: 10000
+          }
         }
       }
-    }
-  ).select("-password")
+    ).select("-password")
+    console.log("i should run!")
+
+    return user;
+  } catch (e) {
+    console.log("ERROR", e)
+  }
 }

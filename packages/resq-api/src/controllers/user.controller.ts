@@ -5,7 +5,6 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const { username, location, roles, password } = req.body;
     const usernameExists = await User.findOne({ username });
-    console.log("user", usernameExists)
     if (usernameExists) {
       return res.status(401).json({
         error: "username already exists try again with different username",

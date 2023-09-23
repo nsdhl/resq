@@ -8,7 +8,9 @@ class NotificationWorker {
     const worker: Worker = new Worker('notification', async (job: Job) => {
       const users = await getNearestUsers(job.data.location);
 
-      const subscribedUsers = await Subscription.find({ user: users.map(el => el._id) }).select(["-user", "-_id", "-__v"])
+      if (!users) return;
+      const subscribedUsers = await Subscription.find({ user: { $in: [...users.map(el => el._id.toString())] } })
+
 
       const options: any = {
         vapidDetails: {

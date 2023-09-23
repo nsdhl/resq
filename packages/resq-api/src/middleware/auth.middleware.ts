@@ -6,7 +6,6 @@ import jwt from "jsonwebtoken";
 export const isLogin = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const token = extractTokenFromHeader(req);
-    console.log("hey", token)
     if (!token) {
       return res.status(401).json({
         ERR: "You are not authorized to access this route!"
