@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 
 interface IUser {
   _id: Types.ObjectId;
-  fullname: string;
   roles: string[];
   location: {
     type: String,
@@ -17,10 +16,6 @@ interface IUser {
 }
 
 const userSchema = new Schema<IUser>({
-  fullname: {
-    type: String,
-    required: true,
-  },
   roles: {
     type: [String],
     required: true,

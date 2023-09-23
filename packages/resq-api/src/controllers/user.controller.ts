@@ -3,17 +3,17 @@ import { Request, Response } from "express";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { username, fullname, location, roles, password } = req.body;
+    const { username, location, roles, password } = req.body;
     const usernameExists = await User.findOne({ username });
+    console.log("user", usernameExists)
     if (usernameExists) {
-      return res.json({
-        error: "email already exists try again with different email",
+      return res.status(401).json({
+        error: "username already exists try again with different username",
       });
     }
 
     const user = new User({
       username,
-      fullname,
       roles,
       location: {
         type: "Point",
@@ -23,7 +23,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
 
     await user.save();
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
     })
   } catch (e) {

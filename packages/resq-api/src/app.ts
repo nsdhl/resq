@@ -28,9 +28,10 @@ app.get("/", async (req: Request, res: Response) => {
 
 app.use("/api", router);
 
-new NotificationWorker();
 
 const server = http.createServer(app);
+
+new NotificationWorker();
 
 server.listen(process.env.PORT, () => {
   console.log(`App is running at ${process.env.PORT}`);

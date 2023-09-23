@@ -5,6 +5,7 @@ import { AuthRequest, IJwtPayload } from "../typings/interface";
 export const createSubscription = async (req: AuthRequest, res: Response) => {
   try {
     const { userId } = req.user as IJwtPayload;
+    console.log("hello", userId)
 
     await Subscription.create({
       user: userId,

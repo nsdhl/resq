@@ -1,7 +1,8 @@
 import { AppBar, Box, Button, IconButton, Stack, Toolbar } from "@mui/material";
-import { ErrorOutline } from "@mui/icons-material";
+import { ErrorOutline, Home, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { registerServiceWorker, subscribe } from "../helpers/registerSw";
+import When from "../hoc/When";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -47,9 +48,18 @@ const Navbar = () => {
           >
             Turn On Notification
           </Button>
+          <Box sx={{
+            cursor: "pointer"
+          }} onClick={() => {
+            navigate("/")
+          }} m="0rem 2.5rem">
+            <Home />
+          </Box>
           <Stack
             direction="row"
             justifyContent="right"
+            alignItems="center"
+            columnGap="2rem"
             sx={{
               width: "100%",
             }}
@@ -70,6 +80,44 @@ const Navbar = () => {
             >
               Report Incident
             </Button>
+
+            <Button
+              onClick={() => {
+                if (user) {
+                  return navigate("/sos");
+                }
+                navigate("/signin");
+              }}
+              variant="contained"
+              endIcon={<ErrorOutline />}
+              color="error"
+              sx={{
+                borderRadius: "100px",
+              }}
+            >
+              SOS
+            </Button>
+
+            <Button
+              onClick={() => {
+                navigate("/generate-report")
+              }}
+              variant="contained"
+              endIcon={<ErrorOutline />}
+              color="error"
+              sx={{
+                borderRadius: "100px",
+              }}
+            >
+              Report
+            </Button>
+
+            <When condition={!!user}>
+              <Logout onClick={() => {
+                localStorage.removeItem("user")
+                navigate("")
+              }} />
+            </When>
           </Stack>
         </Toolbar>
       </AppBar>

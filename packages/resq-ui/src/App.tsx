@@ -2,6 +2,7 @@ import { registerServiceWorker, subscribe } from "./helpers/registerSw";
 import Router from "./router.tsx"
 import Navbar from "./components/Navbar.tsx";
 import "./axios.ts"
+import { Toaster } from "react-hot-toast";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       {/* <button onClick={notification}>Turn On Notification?</button> */}
       <Navbar />
       <Router />
+      <Toaster />
     </>
   )
 }

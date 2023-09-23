@@ -16,6 +16,7 @@ const createNewIncident = async (req: AuthRequest<ICreateIncidentBody>, res: Res
 
     const { userId } = req.user as IJwtPayload;
 
+
     const newIncident = await Incident.create({
       user: userId,
       location: {
@@ -26,9 +27,9 @@ const createNewIncident = async (req: AuthRequest<ICreateIncidentBody>, res: Res
       incidentName,
     });
 
+    console.log("im running")
+    notificationQueue.add('notification', { location, description, incidentName })
     res.status(200).json(newIncident);
-
-    notificationQueue.add('location', { location, description, incidentName })
   } catch (e) {
     res.status(400).json("Something terrible happened!")
   }
