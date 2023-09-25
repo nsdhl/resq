@@ -47,7 +47,7 @@ const deleteIncident = async (id: string) => {
                 <TableCell align="right">
                   
                   <IconButton>
-                    <EditIcon />
+                    <EditIcon color="error"/>
                   </IconButton>
                   <IconButton onClick={()=>deleteIncident(row._id)}>
                     <DeleteIcon color="warning"/>
