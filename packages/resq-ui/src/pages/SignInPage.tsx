@@ -143,7 +143,7 @@ const SignInPage: FC<ISignInPage> = ({ isSignUp }) => {
                 password: credential.password,
               });
               localStorage.setItem("user", JSON.stringify(data));
-              navigate("/report");
+              navigate("/report ");
             }
           }}
         >

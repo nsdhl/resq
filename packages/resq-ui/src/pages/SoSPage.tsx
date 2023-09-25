@@ -36,11 +36,11 @@ const SoSPage = () => {
   return (
     <Stack direction="row" sx={{
       justifyContent: "center",
-      background: "blue",
-      width: "230px",
-      height: "230px",
+      background: "red",
+      width: "200px",
+      height: "50px",
       margin: "0 auto",
-      marginTop: "10rem",
+      marginTop: "20rem",
       borderRadius: "12px",
       cursor: "pointer"
     }} onClick={() => initiateSoS()}>
