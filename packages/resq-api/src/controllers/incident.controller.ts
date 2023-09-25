@@ -50,5 +50,19 @@ const getAllIncident = async (req: Request, res: Response) => {
 
   res.status(200).json(incidents)
 }
-
-export { createNewIncident, getByUser, getAllIncident };
+const getIncidents = async (req:Request, res:Response)=>{
+  const incident = await Incident.find();
+  const onlyIncidents = incident.filter(incident=> incident.incidentName!=="SOS")
+  res.status(200).json(onlyIncidents)
+}
+const getSOS = async (req:Request, res:Response)=>{
+  const sos = await Incident.find();
+  const onlySOS = sos.filter(sos=> sos.incidentName==="SOS")
+  res.status(200).json(onlySOS)
+}
+const deleteIncident = async (req: Request, res: Response) => { 
+  const { id } = req.params;
+  const incident = await Incident.findByIdAndDelete(id);
+  res.status(200).json(incident)
+}
+export { createNewIncident, getByUser, getAllIncident, getIncidents , getSOS, deleteIncident };
