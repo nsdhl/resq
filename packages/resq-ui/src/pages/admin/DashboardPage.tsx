@@ -22,6 +22,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import UpdateIncident from "./UpdateIncident";
 
 const drawerWidth = 240;
 
@@ -78,9 +79,6 @@ export default function PersistentDrawerLeft() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-React.useEffect(()=>{
-  navigate('overview')
-},[])
   const handleDrawerOpen = () => {
     setOpen(true);
   };
