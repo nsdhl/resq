@@ -1,3 +1,4 @@
+import { Admin } from "../models/admin.model";
 import User from "../models/user.model";
 import { Request, Response } from "express";
 
@@ -78,6 +79,13 @@ export const userLogin = async (req: Request, res: Response) => {
 };
 
 
+export const adminRegister = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  await Admin.create({ username, password })
+
+  res.status(200).json({ success: "Account created!" })
+}
 
 
 

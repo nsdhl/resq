@@ -14,17 +14,14 @@ const SoSPage = () => {
     }
 
     async function successFunction(position: any) {
-      console.log("position", position);
-      const res = await url.post("/incident", {
+      const res = await url.post("/sos", {
         location: [
           parseFloat(position.coords.latitude),
           parseFloat(position.coords.longitude)
         ],
-        description: "SOS",
-        incidentName: "SOS",
       });
       console.log("res", res)
-      toast.success("Your incident has been posted!")
+      toast.success("Your SoS has been posted!")
       navigate("/")
     }
 

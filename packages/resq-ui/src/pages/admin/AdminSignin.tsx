@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,15 +7,16 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import resqLogo from "../../assets/resqlogo.png"
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
-    <Typography variant="body2"  color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         ResQ
@@ -30,13 +30,16 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if (data.get("email") === "admin" && data.get("password") === "helloworld") {
+      toast.success("Admin Login Success!")
+      navigate("/dashboard")
+    }
   };
 
   return (
@@ -55,10 +58,10 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar> */}
           <img
-          src={resqLogo}
-          alt="Sign In"
-          style={{ display: "block", margin: "0 auto", maxWidth: "200px" }}
-        />
+            src={resqLogo}
+            alt="Sign In"
+            style={{ display: "block", margin: "0 auto", maxWidth: "200px" }}
+          />
           <Typography component="h1" variant="h5">
             Admin Sign in
           </Typography>
