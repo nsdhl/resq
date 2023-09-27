@@ -6,6 +6,7 @@ import resqLogo from "../assets/resqlogo.png"
 import When from "../hoc/When";
 import MapComponent from "../components/Map";
 import { toast } from "react-hot-toast";
+import { Link } from '@mui/material';
 
 interface ISignInPage {
   isSignUp: boolean;
@@ -157,6 +158,15 @@ const SignInPage: FC<ISignInPage> = ({ isSignUp }) => {
         }}>New? Create an account</Typography>
       </Stack>
 
+       {/* <Typography variant="body2"  color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        ResQ
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography> */}
+  
       <Dialog onClose={() => setShowModal(false)} open={showModal}>
         <Box sx={{
           width: "100vw",
