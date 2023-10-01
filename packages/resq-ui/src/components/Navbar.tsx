@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, Stack, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Stack, Toolbar, Typography } from "@mui/material";
 import { ErrorOutline, Home, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { registerServiceWorker, subscribe } from "../helpers/registerSw";
@@ -17,6 +17,8 @@ const Navbar = () => {
       console.log(e);
     }
   };
+
+  
 
   return (
     <Box sx={{ flexGrow: 1 }}>

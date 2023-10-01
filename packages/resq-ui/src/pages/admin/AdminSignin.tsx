@@ -30,15 +30,17 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     if (data.get("email") === "admin" && data.get("password") === "helloworld") {
       toast.success("Admin Login Success!")
       navigate("/dashboard")
+    } else {
+      toast.error("Invalid Admin Credentials");
     }
   };
 
@@ -54,9 +56,6 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
           <img
             src={resqLogo}
             alt="Sign In"

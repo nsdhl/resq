@@ -1,6 +1,7 @@
 import {useRoutes} from "react-router-dom";
 import Incident from "./Incident";
 import Sos from "./Sos";
+import AdminSos from "./AdminSos";
 export default function AdminRouter(){
   return useRoutes([
     {
@@ -10,7 +11,8 @@ export default function AdminRouter(){
     },
     {
       path:"sos-admin",
-      element:<Sos/>
+      element:
+      <AdminSos/>
     }
   ]);
 }

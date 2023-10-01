@@ -27,13 +27,14 @@ const ReportIncidentPage = () => {
         direction="column"
         rowGap="1.5rem"
         sx={{
-          width: "50%",
+          width: "25%",
           margin: "0 auto",
-          p: "2rem 0rem",
-          backgroundColor: "#f7f7f7",
+          p: "2rem 2rem",
+          backgroundColor: "white",
           borderRadius: "8px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          marginTop: "5rem",
+          marginTop: "10rem",
+          border: "1px solid #e0e0e0",
         }}
       >
         <img
@@ -84,7 +85,7 @@ const ReportIncidentPage = () => {
 
         <Button
           sx={{
-            width: { xs: "100%", md: "20%" },
+            width: { xs: "100%", md: "20%", lg:'100%' },
             margin: "0 auto",
           }}
           variant="contained"

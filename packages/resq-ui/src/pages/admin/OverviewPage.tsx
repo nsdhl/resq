@@ -6,7 +6,6 @@ export default function OverView(){
         { value: 5, label: 'A' },
         { value: 10, label: 'B' },
         { value: 15, label: 'C' },
-        { value: 20, label: 'D' },
       ];
       
       const size = {
@@ -16,12 +15,10 @@ export default function OverView(){
       
     return (
         <>
-        <div style={{display:'flex', width:'100%', height:'100%', flexWrap:"wrap", gap:"60px", justifyContent:"center"}}>
-            <BasicCard description={'terobau'} title={'terai bau'} number={2}/>
-            <BasicCard description={'terobau'} title={'terai bau'} number={2}/>
-            <BasicCard description={'terobau'} title={'terai bau'} number={2}/>
-            <BasicCard description={'terobau'} title={'terai bau'} number={2}/>
-            <PieChart
+        <div style={{display:'flex', width:'100%', height:'100%', flexWrap:"wrap", gap:"60px", justifyContent:"center", }}>
+        <BasicCard description={'snbsaibcusa'} title={<span style={{ fontSize: '24px' }}>Total Incident Reported</span>} number={2} />
+        <BasicCard description={''} title={<span style={{ fontSize: '24px' }}>Total Incident Reported</span>} number={2} />
+        <BasicCard description={''} title={<span style={{ fontSize: '24px' }}>Total Incident Reported</span>} number={2} />            <PieChart
       series={[
         {
           arcLabel: (item) => `${item.label} (${item.value})`,

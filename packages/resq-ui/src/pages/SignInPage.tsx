@@ -31,16 +31,15 @@ const SignInPage: FC<ISignInPage> = ({ isSignUp }) => {
     <>
       <Stack
         direction="column"
-        rowGap="1.33rem"
+        rowGap="1.5rem"
         sx={{
-          width: "40%",
-          justifyContent: "center",
+          width: "25%",
           margin: "0 auto",
-          p: "1.5rem 0rem",
-          backgroundColor: "#f7f7f7",
+          p: "2rem 2rem",
+          backgroundColor: "white",
           borderRadius: "8px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          marginTop: "5rem",
+          marginTop: "10rem",
 
         }}
       >
@@ -88,7 +87,7 @@ const SignInPage: FC<ISignInPage> = ({ isSignUp }) => {
           id="password"
           label="Password"
           variant="outlined"
-          // type="password" 
+          type="password" 
           size="medium"
           fullWidth
           sx={{
