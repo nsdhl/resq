@@ -7,6 +7,7 @@ interface ISoS {
     type: String,
     coordinates: number[]
   };
+  description: string;
 }
 
 const sosSchema = new Schema<ISoS>({
@@ -17,6 +18,9 @@ const sosSchema = new Schema<ISoS>({
     },
     coordinates: [Number]
   },
+  description:{
+    type:String,
+  }
 })
 
 export const SoS = model<ISoS>("SoS", sosSchema)

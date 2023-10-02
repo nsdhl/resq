@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IIncident } from "../../types/interface";
 import { url } from "../../axios";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import MapComponent from "../../components/Map"
 
 const ReportPage = () => {
   const [incident, setIncident] = useState<IIncident[]>([])
@@ -9,9 +10,13 @@ const ReportPage = () => {
   useEffect(() => {
     (
       async () => {
-        const { data } = await url.get("/incident/sos");
+       try{ const { data } = await url.get("/sos/get");
         setIncident(data)
-        console.log(data);
+        console.log("data for the sos",data);
+       }
+       catch(e){
+         console.log(e);
+       }
       }
     )()
   }, [])
@@ -43,6 +48,7 @@ const ReportPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
+    <MapComponent incident={incident} hideIncident={false} />
     </>
   )
 }
