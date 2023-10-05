@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BasicCard from "../../components/Card";
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import axios from "axios";
+import { url } from "../../axios";
 
 export default function OverView() {
   const [incidentCount, setIncidentCount] = useState(0);
@@ -14,20 +15,29 @@ export default function OverView() {
   };
 
    useEffect(() => {
-    const apiUrl = "http://localhost:5000/api/overview";
+    const fetchData = async () => {
+      try {
+        const { data } = await url.get("/sos/get");
+const incidents = await url.get("/incident/incidents");
+        setIncidentCount(incidents.data.length);
+        setSosCount(data.length);
+        setTotalDisastersCount(incidents.data.length+data.length);
+        console.log("data for the sos", data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-    axios.get(apiUrl).then((repos) => {
-      const allData = repos.data;
-      setIncidentCount(allData.incidentCount);
-      setSosCount(allData.sosCount);
-      setTotalDisastersCount(allData.totalDisastersCount);
-    })
+    fetchData();
 
-    .catch((error) => {
-      console.error("Axios Error:", error);
-    });
+    const timeoutId = setTimeout(() => {
+      setSosCount(0);
+    }, 1 * 60 * 1000);
 
-  }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+   }
   , []);
 
   const data = [
