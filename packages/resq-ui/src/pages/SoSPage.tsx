@@ -38,16 +38,18 @@ const SoSPage = () => {
     <Stack direction="row" sx={{
       justifyContent: "center",
       alignItems: "center",
-      background: "red",
-      width: "200px",
+      width: "300px",
+      flexDirection: "column",
+      gap:'2rem',
       height: "50px",
       margin: "0 auto",
       marginTop: "20rem",
       borderRadius: "12px",
       cursor: "pointer"
-    }} onClick={() => initiateSoS()}>
-      SOS
-    </Stack>
+    }}>
+      
+      <h1 style={{fontSize:'35px', fontWeight:'bold', color:'#d90429'}}>SOS Asistance</h1>
+      <p>Please use SOS feature incase of Emergency</p>
 
     <TextField
           onChange={(e) => {
@@ -59,13 +61,17 @@ const SoSPage = () => {
           size="medium"
           sx={{
             mb: 2,
+            mt: 2,
+            width: "100%",
             "& .MuiOutlinedInput-root": {
               width: "100%",
-              marginLeft: "auto",
-              marginRight: "auto",
             },
           }}
         />
+        <button style={{padding:'10px', fontSize:'18px', width:'100%', background:'#d90429', color:'white', fontWeight:'bold', borderRadius:"8px", border:'none', cursor:"pointer"}} onClick={()=>initiateSoS()}>
+        SOS <i className="fas fa-exclamation-triangle"></i>
+      </button>
+            </Stack>
     </>
   )
 }

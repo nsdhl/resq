@@ -65,4 +65,16 @@ const deleteIncident = async (req: Request, res: Response) => {
   const incident = await Incident.findByIdAndDelete(id);
   res.status(200).json(incident)
 }
-export { createNewIncident, getByUser, getAllIncident, getIncidents , getSOS, deleteIncident };
+const updateIncident = async (req: Request, res: Response) => {
+  try{
+  const {id} = req.params;
+const {title, description } = req.body;
+console.log(title, description, id,"data from frontend")
+const incident = await Incident.findByIdAndUpdate(id, {incidentName:title, description:description}, {new: true});
+res.status(200).send('incident updated')
+  }catch(e){
+    res.status(400).send('something went wrong');
+  }
+
+}
+export { createNewIncident, getByUser, getAllIncident, getIncidents , getSOS, deleteIncident, updateIncident };

@@ -41,7 +41,8 @@ const sendData = (title:string, description:string, id:string) => {
 }
   return (
     <>
-    { open && <UpdateIncident props = {{title:data.title, description:data.description, id:data.id}}/>}
+    { open && <UpdateIncident title={data.title} description={data.description} id={data.id} setOpen={setOpen} fetchIncident={fetchIncident}
+    />}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
