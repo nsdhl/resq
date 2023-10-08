@@ -3,10 +3,22 @@ import { IIncident } from "../../types/interface";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { url } from "../../axios";
+import UpdateIncident from "./UpdateIncident";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow , IconButton} from "@mui/material";
 
 const ReportPage = () => {
+  interface update {
+    title:string, 
+    description:string,
+    id:string
+  }
   const [incident, setIncident] = useState<IIncident[]>([])
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState<update>({
+    title:'',
+    description:'',
+    id:''
+  })
   const fetchIncident = async () => {
     const { data } = await url.get("/incident/incidents");
     setIncident(data)
@@ -21,8 +33,16 @@ const deleteIncident = async (id: string) => {
   const {data} = await url.delete(`/incident/${id}`);
   fetchIncident();
 }
+const sendData = (title:string, description:string, id:string) => {
+   setData({
+    title, description, id
+  })
+  setOpen(true)
+}
   return (
     <>
+    { open && <UpdateIncident title={data.title} description={data.description} id={data.id} setOpen={setOpen} fetchIncident={fetchIncident}
+    />}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -47,7 +67,7 @@ const deleteIncident = async (id: string) => {
                 <TableCell align="right">
                   
                   <IconButton>
-                    <EditIcon color="error"/>
+                    <EditIcon color="error" onClick={()=>sendData(row.incidentName, row.description, row._id)}/>
                   </IconButton>
                   <IconButton onClick={()=>deleteIncident(row._id)}>
                     <DeleteIcon color="warning"/>

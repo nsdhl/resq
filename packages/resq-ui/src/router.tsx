@@ -11,6 +11,7 @@ import AdminSignin from "./pages/admin/AdminSignin"
 import DashboardPage from "./pages/admin/DashboardPage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import OverView from "./pages/admin/OverviewPage";
+import UpdateIncident from "./pages/admin/UpdateIncident";
 export default function Router() {
   return useRoutes([
     {
@@ -60,13 +61,13 @@ export default function Router() {
           element: <Report/>
         },
         {
-          path:"overview",
+          path:"",
           element:<OverView/>
+        },
+        {
+          path:'update',
+          element:<UpdateIncident/>
         }
-
-       
-
-
       ]
     },
   ]);

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
-import AdminRouter from "./AdminRouter";
+// import AdminRouter from "./AdminRouter";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import resqLogo from "../../assets/resqlogo.png";
@@ -22,6 +22,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+// import UpdateIncident from "./UpdateIncident";
+// import UpdateSos from "./UpdateSos";
+import { Link } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -78,9 +82,6 @@ export default function PersistentDrawerLeft() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-React.useEffect(()=>{
-  navigate('overview')
-},[])
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -137,7 +138,7 @@ React.useEffect(()=>{
         <Divider />
         <List>
           {[
-            { title: "Dashboard", path: "overview" },
+            { title: "Dashboard", path: "" },
             { title: "Incident", path: "incident" },
             { title: "SOS", path: "sos-admin" },
             { title: "Report", path: "report-admin" },
@@ -155,9 +156,11 @@ React.useEffect(()=>{
         <Divider />
         <List>
           <ListItem key={"signout"} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={"signout"} />
-            </ListItemButton>
+            <Link to="/signin-admin" style={{ textDecoration: 'none' }}>
+              <ListItemButton>
+                <ListItemText primary={"signout"} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
       </Drawer>
